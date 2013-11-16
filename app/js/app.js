@@ -13,8 +13,16 @@ angular.module('youtubeWidget.controllers', []).
 
 	}]);
 
-angular.module('youtubeWidget.directives', []).
-	directive('youtubeWidgetApp', ['widgetName', 'widgetByLine', 'day', function(widgetName, widgetByLine, day){
+angular.module('youtubeWidget.directives', ['youtubeWidget.factories']).
+	controller('youtubeWidgetApp.ctrl', ['$scope', 'widgetName', 'widgetByLine', 'day', function($scope, widgetName, widgetByLine, day) {
+		$scope.test = 'Test Complete';
+		$scope.name = widgetName.name;
+		$scope.by = widgetByLine.by;
+		$scope.date = day.day;
+
+		// load style sheet
+	}]).
+	directive('youtubeWidgetApp', function(){
 		return {
 			restrict: 'C',
 			template: '<p>' +
@@ -22,18 +30,9 @@ angular.module('youtubeWidget.directives', []).
 				'</p>' +
 				'<div data-ng-transclude></div>',
 			transclude: true,
-			controller: function($scope, $element, $attrs, $transclude) {
-				$scope.test = 'Test Complete';
-				$scope.name = widgetName.name;
-				$scope.by = widgetByLine.by;
-				$scope.date = day.day;
-				console.log(widgetName);
-				console.log(widgetByLine);
-				console.log(day);
-				// load style sheet
-			}
+			controller: 'youtubeWidgetApp.ctrl'
 		}
-	}]);
+	});
 
 angular.module('youtubeWidget.services', []).
 	service('includeStyle', function(){
@@ -63,6 +62,7 @@ angular.module('youtubeWidget.config', ['youtubeWidget.providers']).
 			}
 		});
 	}).config(function(dayProvider){
+		/* @TODO Is this really tested ? */
 		dayProvider.setDay('Mon');
 	});
 
@@ -80,3 +80,4 @@ angular.module('youtubeWidget.providers', []).
 			}
 		}
 	});
+
