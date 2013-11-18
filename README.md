@@ -1,6 +1,7 @@
 Youtube Widget
 ===
-Implement a single page that interfaces with the Youtube API (iframe or JS) as well as the Youtube feed API and renders videos about Oculus VR using only JS, HTML & CSS.
+Implement a single page that interfaces with the Youtube API (iframe or JS) as well as the
+Youtube feed API and renders videos about Oculus VR using only JS, HTML & CSS.
 
 ## Requirements
 - Only a body tag. Make use of a templating engine
@@ -11,3 +12,10 @@ Implement a single page that interfaces with the Youtube API (iframe or JS) as w
 - Cache video data
 - Cross browser
 - Have fun
+
+## Like to do
+- karma and Jasmine unit tests
+- Grunt build server for concatenation and magnification
+- Bower for dependencies
+- Use font awesome for great icons
+- Dependency load CSS
