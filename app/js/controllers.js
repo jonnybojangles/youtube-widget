@@ -20,10 +20,11 @@ angular.module('youtubeWidget.controllers', []).
 			if (0 < data.data.items.length) {
 //				console.log(data.data);
 				$scope.videos = data.data.items;
+				$scope.videoId = data.data.items[0].id.videoId;
 
 				$scope.nextPageToken = data.data.nextPageToken;
 				$scope.nextPageToken = data.data.nextPageToken;
-//				console.log($scope.videos);
+//				console.log($scope.videos);1
 
 			}
 			/*
@@ -38,26 +39,31 @@ angular.module('youtubeWidget.controllers', []).
 			});
 		});
 
+
+
 		console.log('Test Controller: Last thing inside the controller.');
 	}]).
 	/*
 	* Controller related to the video list directive.
 	* */
-	controller('videoList', ['$scope', '$element', function($scope, $element){
+	controller('videoList', ['$scope', '$element', 'videoPlayer', function($scope, $element, videoPlayer){
 		// Binding for buttons like load more and ???
+		$scope.playNewVideo = function(id){
+			videoPlayer.playNewVideo(id);
+		}
 	}]).
 	/*
 	* Controller related to the video player directive.
 	* */
 	controller(
-		'videoPlayer', ['$scope', '$window', '$element', 'videoPlayer',
-		function($scope, $window, $element, videoPlayer){
+		'videoPlayer', ['$scope', '$window', '$element', 'videoPlayer', '$timeout',
+		function($scope, $window, $element, videoPlayer, $timeout){
 			var player;
 			/*
 			* Youtube player loaded call back
 			* */
 			videoPlayer.setElement($element[0]);
- 			player = $window.onYouTubeIframeAPIReady = videoPlayer.onYouTubeIframeAPIReady;
+ 			$window.onYouTubeIframeAPIReady = videoPlayer.onYouTubeIframeAPIReady;
 
 			/*
 			* Asynchronously load the youtube player
@@ -66,4 +72,9 @@ angular.module('youtubeWidget.controllers', []).
 				console.log('playerJS LOADED');
 			});
 			$scope.title = 'I am a player.';
+
+			$scope.$on('videoPlayer:ready', function(){
+				console.log('ctr plyer ready ready');
+				videoPlayer.playNewVideo('yrAhGfrxaUo');
+			});
 	}]);

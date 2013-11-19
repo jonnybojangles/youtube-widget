@@ -19,3 +19,6 @@ Youtube feed API and renders videos about Oculus VR using only JS, HTML & CSS.
 - Bower for dependencies
 - Use font awesome for great icons
 - Dependency load CSS
+- 16:9 iframe wrapper so there is no blink when the player loads
+- slide in and out channel list for more video player real estate
+- responsive if possible at the element level rather than window.
