@@ -11,6 +11,7 @@ angular.module('youtubeWidget.controllers', []).
 		$scope.query = 'Test';
 		$scope.nextPageToken = '';
 		$scope.prevPageToken = '';
+		$scope.player = null;
 
 		/*
 		* Get our first list of videos
@@ -18,30 +19,23 @@ angular.module('youtubeWidget.controllers', []).
 		videoList = vs.search($scope.query);
 		videoList.then(function(data){
 			if (0 < data.data.items.length) {
-//				console.log(data.data);
 				$scope.videos = data.data.items;
 				$scope.videoId = data.data.items[0].id.videoId;
-
 				$scope.nextPageToken = data.data.nextPageToken;
 				$scope.nextPageToken = data.data.nextPageToken;
-//				console.log($scope.videos);1
-
 			}
 			/*
 			* Get our second list of videos ... beware of RACE conditions "I live my live one ajax call at a time"
+			* @todo load more button function
 			* */
 			videoList = vs.search($scope.query, $scope.nextPageToken);
 			videoList.then(function(data){
-				console.log(data.data);
+//				console.log(data.data);
 				$scope.videos = data.data.items;
 				$scope.nextPageToken = data.data.nextPageToken;
 				$scope.prevPageToken = data.data.prevPageToken;
 			});
 		});
-
-
-
-		console.log('Test Controller: Last thing inside the controller.');
 	}]).
 	/*
 	* Controller related to the video list directive.
@@ -49,32 +43,21 @@ angular.module('youtubeWidget.controllers', []).
 	controller('videoList', ['$scope', '$element', 'videoPlayer', function($scope, $element, videoPlayer){
 		// Binding for buttons like load more and ???
 		$scope.playNewVideo = function(id){
-			videoPlayer.playNewVideo(id);
+			videoPlayer.playNewVideo($scope.player, id);
 		}
 	}]).
 	/*
 	* Controller related to the video player directive.
 	* */
 	controller(
-		'videoPlayer', ['$scope', '$window', '$element', 'videoPlayer', '$timeout',
-		function($scope, $window, $element, videoPlayer, $timeout){
-			var player;
-			/*
-			* Youtube player loaded call back
-			* */
-			videoPlayer.setElement($element[0]);
- 			$window.onYouTubeIframeAPIReady = videoPlayer.onYouTubeIframeAPIReady;
-
-			/*
-			* Asynchronously load the youtube player
-			* */
-			$script('https://www.youtube.com/iframe_api', function(){
-				console.log('playerJS LOADED');
+		'videoPlayer', ['$scope', '$window', '$element', 'videoPlayer',
+		function($scope, $window, $element, videoPlayer){
+			$scope.$on('videoPlayer:apiReady', function(){
+				$scope.player = videoPlayer.createPlayer($element[0], 'yrAhGfrxaUo');
+				$scope.$apply($scope.player);
 			});
-			$scope.title = 'I am a player.';
-
-			$scope.$on('videoPlayer:ready', function(){
-				console.log('ctr plyer ready ready');
-				videoPlayer.playNewVideo('yrAhGfrxaUo');
+			$scope.$on('videoPlayer:playerReady', function(){
+				// @todo This should be instanced with the player or queued without auto play
+//				videoPlayer.playNewVideo($scope.videoId);
 			});
 	}]);

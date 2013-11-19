@@ -4,6 +4,7 @@ angular.module('youtubeWidget.services', ['LocalStorageModule']).
 	/*
 	* @todo add a caching param to the data api look up.
 	* @todo Handle http.get failure
+	* @todo add methods to maintain a video list and append to and remove from it
 	* */
 	provider('videoSearch', [function(){
 		/*
@@ -84,47 +85,57 @@ angular.module('youtubeWidget.services', ['LocalStorageModule']).
 			};
 		}];
 	}]).
+	/*
+	* This video player service is designed for youtube iframe player api.
+	* @todo refactor and or create a facade to work with multiple players.
+	* @todo document available events playerReady and apiReady
+	* */
 	factory('videoPlayer', ['$window', '$rootScope', function($window, $rootScope){
 		var element,
 			player,
 			isPlayerReady = false,
+			isApiReady = false,
+			isApiIncluded = false,
 			onPlayerReady = function(){
-//				console.log(1);
-//				console.log(arguments);
 				isPlayerReady = true;
-				$rootScope.$broadcast('videoPlayer:ready');
+				$rootScope.$broadcast('videoPlayer:playerReady');
 			},
-			onPlayerStateChange = function(){
-//				console.log(2);
-//				console.log(arguments);
-			};
-
-		return {
-			callOnPlayerReady: onPlayerReady, // for testing ?
-			callOnPlayerStateChange: onPlayerStateChange, // for testing ?
-			setElement: function($element){
-				element = $element;
+			onYouTubeIframeAPIReady = function(){
+				isApiReady = true;
+				$rootScope.$broadcast('videoPlayer:apiReady');
 			},
-			onYouTubeIframeAPIReady: function(){
+			onPlayerStateChange = function(){},
+			createPlayer = function(element, videoId){
 				player = new $window.YT.Player(element, {
 //					height: '390',
 //					width: '640',
-					// @todo get a real video ID !
-//					videoId: 'yrAhGfrxaUo',
+					videoId: videoId,
 					events: {
-						'onReady': onPlayerReady,
-						'onStateChange': onPlayerStateChange
+						'onReady': onPlayerReady
+						// 'onStateChange': onPlayerStateChange
 					}
 				});
-
-//				$rootScope.$emit('videoPlayer:ready');
-
-				$window.player = player; // for debugging
-//				player.setSize();
-//				player.loadVideoById(videoId);
-//				return player;
+				return player;
 			},
-			playNewVideo: function(id, timeStart, suggestedQuality){
+			loadPlayerAPI = function(){
+				// @todo document this dependency on the app's async loader?
+				$script('https://www.youtube.com/iframe_api', function(){
+					isApiIncluded = true;
+				});
+			},
+			/*
+			* Video Player start up
+			* */
+			init = function(){
+				loadPlayerAPI();
+				$window.onYouTubeIframeAPIReady = onYouTubeIframeAPIReady;
+			};
+		init();
+		return {
+			callOnPlayerReady: onPlayerReady, // exposed for testing ?
+			callOnPlayerStateChange: onPlayerStateChange, // exposed  for testing ?
+			createPlayer: createPlayer,
+			playNewVideo: function(player, id, timeStart, suggestedQuality){
 				if (isPlayerReady) {
 					console.log(player);
 					player.loadVideoById(id, timeStart, suggestedQuality);

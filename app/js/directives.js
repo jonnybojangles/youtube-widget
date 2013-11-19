@@ -14,12 +14,16 @@ angular.module('youtubeWidget.directives', []).
 			'<input data-ng-model="query"> (I dont do anything yet)' +
 			'<div class="mod-youtubeWidget">' +
 				'<div class="videoPlayerWrapper">' +
-					'<video-player data-video-id="videoId"></video-player>' +
+					'<video-player ' +
+						'data-video-id="videoId"' +
+						'data-player="player"' +
+					'></video-player>' +
 				'</div>' +
 				'<video-list ' +
 					'data-videos="videos" ' +
 					'data-next-page-token="nextPageToken" ' +
 					'data-previous-page-token="prevPageToken"' +
+					'data-player="player"' +
 				'></video-list>' +
 			'</div>' +
 			'');
@@ -32,9 +36,18 @@ angular.module('youtubeWidget.directives').
 			templateUrl: 'videoList.html',
 			controller: 'videoList',
 			scope: {
+				/*
+				* videos array | An array of videos to show inside the video list
+				* The videos should be a youtube data api video object
+				* */
 				videos: '=',
 				nextPageToken: '=',
-				previousPageToken: '='
+				previousPageToken: '=',
+				/*
+				 * player object | The player object returned when a player is instantiated.
+				 * The player that the API acts upon
+				 * */
+				player: '='
 			}
 		}
 	}]).run(function($templateCache){
@@ -57,7 +70,15 @@ angular.module('youtubeWidget.directives').
 			templateUrl: 'videoPlayer.html',
 			controller: 'videoPlayer',
 			scope: {
-				videoId: '='
+				/*
+				* videoId string | The video to load when the player is instantiated
+				* */
+				videoId: '=',
+				/*
+				* player object | The player object returned when a player is instantiated.
+				* The player that the API acts upon
+				* */
+				player: '='
 			}
 		}
 	}]).run(function($templateCache){
