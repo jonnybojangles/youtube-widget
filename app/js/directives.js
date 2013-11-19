@@ -5,22 +5,60 @@ angular.module('youtubeWidget.directives', []).
 		return {
 			restrict: 'C',
 			templateUrl: 'youtubeWidgetApp.html',
-			controller: 'test'
+			controller: 'youtubeWidgetApp'
 		}
 	}]).
 	run(function($templateCache){
 		$templateCache.put('youtubeWidgetApp.html', '' +
+			'<p>Widget App</p>' +
+			'<input data-ng-model="query"> (I dont do anything yet)' +
 			'<div class="mod-youtubeWidget">' +
-				'This is the main youtubeWidget Mod Container ' +
-				'<div class="player">' +
-					'' +
+				'<video-player></video-player>' +
+				'<video-list ' +
+					'data-videos="videos" ' +
+					'data-next-page-token="nextPageToken" ' +
+					'data-previous-page-token="prevPageToken"' +
+				'></video-list>' +
+			'</div>' +
+			'');
+	});
+
+angular.module('youtubeWidget.directives').
+	directive('videoList', [function(){
+		return {
+			restrict: 'E',
+			templateUrl: 'videoList.html',
+			controller: 'videoList',
+			scope: {
+				videos: '=',
+				nextPageToken: '=',
+				previousPageToken: '='
+			}
+		}
+	}]).run(function($templateCache){
+		$templateCache.put('videoList.html', '' +
+				'<div class="videoList">' +
+					'Video List' +
+					'<p>nextPageToken: {{nextPageToken}}</p>' +
+					'<p>previousePagetoken: {{previousPageToken}}</p>' +
+					'<ul>' +
+						'<li data-ng-repeat="video in videos">{{video.snippet.title}}</li>' +
+					'</ul>' +
 				'</div>' +
-				'<ul>' +
-			'       <li data-ng-repeat="video in videos">' +
-			'           {{video.snippet.title}}' +
-			'           <img src="{{video.snippet.thumbnails.default.url}}"/>' +
-			'       </li>' +
-				'</ul>' +
+			'');
+	});
+
+angular.module('youtubeWidget.directives').
+	directive('videoPlayer', [function(){
+		return {
+			restrict: 'E',
+			templateUrl: 'videoPlayer.html',
+			controller: 'videoPlayer'
+		}
+	}]).run(function($templateCache){
+		$templateCache.put('videoPlayer.html', '' +
+			'<div class="videoPlayer">' +
+				'Video Player' +
 			'</div>' +
 			'');
 	});

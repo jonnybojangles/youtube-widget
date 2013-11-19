@@ -51,7 +51,7 @@ angular.module('youtubeWidget.services', ['LocalStorageModule']).
 					q = q || defaultQueryString;
 					var key = cacheKey(q, pageToken),
 						result = ls.get(key);
-
+console.log(pageToken);
 					/*
 					* If not cached look it up and cache it.
 					* */
@@ -84,5 +84,40 @@ angular.module('youtubeWidget.services', ['LocalStorageModule']).
 				}
 			};
 		}];
+	}]).
+	factory('videoPlayer', ['$window', function($window){
+		var element,
+			onPlayerReady = function(){
+				console.log(1);
+				console.log(arguments);
+			},
+			onPlayerStateChange = function(){
+				console.log(2);
+				console.log(arguments);
+			};
 
+		return {
+			callOnPlayerReady: onPlayerReady, // for testing ?
+			callOnPlayerStateChange: onPlayerStateChange, // for testing ?
+			setElement: function($element){
+				element = $element;
+			},
+			onYouTubeIframeAPIReady: function(){
+				var player;
+				var that = this;
+				console.log('Player JS READY');
+				console.log(this);
+
+				player = new $window.YT.Player(element, {
+					height: '390',
+					width: '640',
+					videoId: 'yrAhGfrxaUo',
+					events: {
+						'onReady': onPlayerReady,
+						'onStateChange': onPlayerStateChange
+					}
+				});
+				return player;
+			}
+		}
 	}]);
