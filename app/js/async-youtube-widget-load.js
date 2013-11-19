@@ -24,10 +24,11 @@
 	if (0 < ws.length) {
 		$script([
 			'lib/angular/angular.js',
+			'lib/angular-local-storage/angular-local-storage.js',
 			'js/app.js',
 			'js/controllers.js',
-			'js/directives.js'
-//			'js/services.js',
+			'js/directives.js',
+			'js/services.js'
 //			'js/controllers.js',
 //			'js/filters.js',
 //			'js/directives.js'
