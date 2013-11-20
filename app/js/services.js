@@ -2,7 +2,7 @@
 
 angular.module('youtubeWidget.services', ['LocalStorageModule']).
 	/*
-	* @todo add a caching param to the data api look up.
+	* @todo add a caching bool to the data api look up.
 	* @todo Handle http.get failure
 	* @todo add methods to maintain a video list and append to and remove from it
 	* */
@@ -28,7 +28,7 @@ angular.module('youtubeWidget.services', ['LocalStorageModule']).
 		/*
 		* Our service
 		* */
-		this.$get = ['$q', 'localStorageService', '$http', '$timeout', function($q, ls, $http, $timeout){
+		this.$get = ['$q', 'localStorageService', '$http', function($q, ls, $http){
 			var api = this.api,
 				maxResults = this.maxResults,
 				cachePrefix = this.cachePrefix,
@@ -94,9 +94,8 @@ angular.module('youtubeWidget.services', ['LocalStorageModule']).
 	* @todo refactor and or create a facade to work with multiple players.
 	* @todo document available events playerReady and apiReady
 	* */
-	factory('videoPlayer', ['$q', '$window', '$rootScope', function($q, $window, $rootScope){
-		var element,
-			player,
+	factory('videoPlayer', ['$q', '$window', function($q, $window){
+		var player,
 			isApiIncluded = false,
 			isApiReadyPromise,
 			isPlayerReadyPromise,
@@ -128,22 +127,16 @@ angular.module('youtubeWidget.services', ['LocalStorageModule']).
 					isApiIncluded = true;
 				});
 			};
-			/*
-			* Video Player start up
-			* */
-//		init();
 		return {
 			callOnPlayerReady: onPlayerReady, // exposed for testing ?
 			callOnPlayerStateChange: onPlayerStateChange, // exposed  for testing ?
 			createPlayer: createPlayer,
 			playNewVideo: function(player, id, timeStart, suggestedQuality){
-				if (isPlayerReady) {
-					console.log(player);
+				if (player) {
 					player.loadVideoById(id, timeStart, suggestedQuality);
 				}
 			},
 			init: function(){
-				console.log(1);
 				isApiReadyPromise = $q.defer();
 				loadPlayerAPI();
 				$window.onYouTubeIframeAPIReady = onYouTubeIframeAPIReady;
