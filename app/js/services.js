@@ -2,7 +2,7 @@
 
 angular.module('youtubeWidget.services', ['LocalStorageModule']).
 	/*
-	* @todo add a caching param to the data api look up.
+	* @todo add a caching bool to the data api look up.
 	* @todo Handle http.get failure
 	* @todo add methods to maintain a video list and append to and remove from it
 	* */
@@ -61,12 +61,13 @@ angular.module('youtubeWidget.services', ['LocalStorageModule']).
 							type: 'video',
 							key: api.key,
 							maxResults: maxResults,
-							q: q
+							q: q,
+							callback: 'JSON_CALLBACK'
 						};
 						if (pageToken) {
 							params.pageToken = pageToken
 						}
-						return $http.get(
+						return $http.jsonp(
 							api.baseURI, {params: params}).
 							/*
 							 * When promise completes cache the return.
@@ -81,6 +82,9 @@ angular.module('youtubeWidget.services', ['LocalStorageModule']).
 					} else {
 						return $q.when(result);
 					}
+				},
+				mergeVideoLists: function(a, b){
+					return a.concat(b);
 				}
 			};
 		}];
@@ -90,22 +94,20 @@ angular.module('youtubeWidget.services', ['LocalStorageModule']).
 	* @todo refactor and or create a facade to work with multiple players.
 	* @todo document available events playerReady and apiReady
 	* */
-	factory('videoPlayer', ['$window', '$rootScope', function($window, $rootScope){
-		var element,
-			player,
-			isPlayerReady = false,
-			isApiReady = false,
+	factory('videoPlayer', ['$q', '$window', function($q, $window){
+		var player,
 			isApiIncluded = false,
+			isApiReadyPromise,
+			isPlayerReadyPromise,
 			onPlayerReady = function(){
-				isPlayerReady = true;
-				$rootScope.$broadcast('videoPlayer:playerReady');
+				isPlayerReadyPromise.resolve(player);
 			},
 			onYouTubeIframeAPIReady = function(){
-				isApiReady = true;
-				$rootScope.$broadcast('videoPlayer:apiReady');
+				isApiReadyPromise.resolve();
 			},
 			onPlayerStateChange = function(){},
 			createPlayer = function(element, videoId){
+				isPlayerReadyPromise = $q.defer();
 				player = new $window.YT.Player(element, {
 //					height: '390',
 //					width: '640',
@@ -115,31 +117,30 @@ angular.module('youtubeWidget.services', ['LocalStorageModule']).
 						// 'onStateChange': onPlayerStateChange
 					}
 				});
-				return player;
+				return isPlayerReadyPromise.promise;
+
 			},
 			loadPlayerAPI = function(){
+				// @todo call once
 				// @todo document this dependency on the app's async loader?
 				$script('https://www.youtube.com/iframe_api', function(){
 					isApiIncluded = true;
 				});
-			},
-			/*
-			* Video Player start up
-			* */
-			init = function(){
-				loadPlayerAPI();
-				$window.onYouTubeIframeAPIReady = onYouTubeIframeAPIReady;
 			};
-		init();
 		return {
 			callOnPlayerReady: onPlayerReady, // exposed for testing ?
 			callOnPlayerStateChange: onPlayerStateChange, // exposed  for testing ?
 			createPlayer: createPlayer,
 			playNewVideo: function(player, id, timeStart, suggestedQuality){
-				if (isPlayerReady) {
-					console.log(player);
+				if (player) {
 					player.loadVideoById(id, timeStart, suggestedQuality);
 				}
+			},
+			init: function(){
+				isApiReadyPromise = $q.defer();
+				loadPlayerAPI();
+				$window.onYouTubeIframeAPIReady = onYouTubeIframeAPIReady;
+				return isApiReadyPromise.promise;
 			}
 		}
 	}]);
