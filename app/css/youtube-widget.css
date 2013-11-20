@@ -6,6 +6,7 @@
 	width: 100%;
 	padding-bottom: 56.25%; /* 16:9 */
 	position: relative;
+	opacity: 0;
 }
 .mod-youtubeWidget .videoPlayerWrapper iframe {
 	position: absolute;
@@ -13,5 +14,30 @@
 	height: 100%;
 	top: 0; left: 0; right: 0; bottom: 0;
 }
+
+.mod-youtubeWidget.playerActive .videoPlayerWrapper {
+	-webkit-animation: fadeIn 1s normal forwards; /* Safari 4+ */
+	-moz-animation:    fadeIn 1s normal forwards; /* Fx 5+ */
+	-o-animation:      fadeIn 1s normal forwards; /* Opera 12+ */
+	animation:         fadeIn 1s normal forwards; /* IE 10+ */
+}
+
+@-webkit-keyframes fadeIn {
+	0%   { opacity: 0; }
+	100% { opacity: 1; }
+}
+@-moz-keyframes fadeIn {
+	0%   { opacity: 0; }
+	100% { opacity: 1; }
+}
+@-o-keyframes fadeIn {
+	0%   { opacity: 0; }
+	100% { opacity: 1; }
+}
+@keyframes fadeIn {
+	0%   { opacity: 0; }
+	100% { opacity: 1; }
+}
+
 
 /*@ sourceMappingURL=youtube-widget.css.map */
