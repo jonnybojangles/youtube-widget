@@ -4,7 +4,7 @@ Implement a single page that interfaces with the Youtube API (iframe or JS) as w
 Youtube feed API and renders videos about Oculus VR using only JS, HTML & CSS.
 
 ## Requirements
-- [ ] Only a body tag. Make use of a templating engine
+- [x] Only a body tag. Make use of a templating engine
 - [x] Show one video at a time
 - [x] Navigation for different videos
 - [x] Each nav item should show a thumbnail of it's video

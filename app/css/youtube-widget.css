@@ -1,6 +1,3 @@
-/* beware of at import ! */
-@import url(http://fonts.googleapis.com/css?family=Roboto:400,100);
-
 .mod-youtubeWidget {
 	font-family: "Roboto", "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
 	font-weight: 100;
@@ -56,8 +53,6 @@
 .mod-youtubeWidget.listActive .listWrapper {
 	opacity: 1;
 }
-
-
 .mod-youtubeWidget .appTitle,
 .mod-youtubeWidget .videoTitle {
 	font-family: 'Roboto', serif;
