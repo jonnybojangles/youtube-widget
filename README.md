@@ -36,3 +36,4 @@ Youtube feed API and renders videos about Oculus VR using only JS, HTML & CSS.
 
 ## Known issues
 - [ ] localstorage is not set to expire ... search results may change since they were last cached resulting in duplicate videos in the list
+

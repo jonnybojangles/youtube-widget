@@ -37,13 +37,10 @@ module.exports = function(grunt) {
 			}
 		}
 	});
-
 	// Load required modules
 	grunt.loadNpmTasks('grunt-contrib-concat');
 	grunt.loadNpmTasks('grunt-contrib-uglify');
 	grunt.loadNpmTasks('grunt-contrib-cssmin');
-
 	// Task definitions
 	grunt.registerTask('default', ['concat', 'uglify', 'cssmin']);
-
 };
