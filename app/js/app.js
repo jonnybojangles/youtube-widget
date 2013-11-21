@@ -1,7 +1,10 @@
-'use strict';
+(function(){
+	"use strict";
 
-angular.module('youtubeWidget',[
-	'youtubeWidget.services',
-	'youtubeWidget.directives',
-	'youtubeWidget.controllers'
-]);
+	angular.module('youtubeWidget',[
+		'youtubeWidget.services',
+		'youtubeWidget.directives',
+		'youtubeWidget.controllers'
+	]);
+})();
+
