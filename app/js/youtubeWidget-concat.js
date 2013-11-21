@@ -393,7 +393,7 @@ angular.module('youtubeWidget.controllers', []).
 	controller('youtubeWidgetApp', ['$scope', function($scope){
 		$scope.videos = [];
 		// @todo make this a configure
-		$scope.query = 'Test';
+		$scope.query = 'Oculus';
 		$scope.player = null;
 		$scope.videoMeta = {
 			videoId: '',
@@ -510,4 +510,4 @@ angular.module('youtubeWidget.controllers', []).
 					}
 				});
 			});
-	}]);
+	}]); 

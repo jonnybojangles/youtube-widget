@@ -29,7 +29,12 @@ Youtube feed API and renders videos about Oculus VR using only JS, HTML & CSS.
 - [ ] Order videos by
 - [ ] App script loader injects widget if no place holder is found
 - [ ] Repair IDE's files watches to support SCSS
-- [ ] Update or write own localstorage provider I would like to see expire dates built into the system (could be built into the key as wel)
+- [ ] Update or write own localstorage provider I would like to see expire dates built into the system (could be built into the key as well)
 - [x] Added error CSS
 - [ ] Added created with easter egg playlist
 - [ ] Stringify the CSS and bring it in with JS to reduce server requests and repaint
+
+## Known issues
+- [ ] localstorage is not set to expire ... search results may change since they were last cached resulting in duplicate videos in the list
+
+
