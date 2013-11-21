@@ -3,6 +3,9 @@ Youtube Widget
 Implement a single page that interfaces with the Youtube API (iframe or JS) as well as the
 Youtube feed API and renders videos about Oculus VR using only JS, HTML & CSS.
 
+## Example
+<http://youtube.solidcobalt.com/> as of 20131121
+
 ## Requirements
 - [x] Only a body tag. Make use of a templating engine
 - [x] Show one video at a time
@@ -16,9 +19,9 @@ Youtube feed API and renders videos about Oculus VR using only JS, HTML & CSS.
 
 ## Like to do
 - [x] Set up karma and Jasmine confs
-- [-] unit tests
+- [-] Unit tests
 - [x] Grunt build server for concatenation and magnification
-- [-] dependencies, package.json
+- [-] Dependencies, package.json
 - [ ] Use font awesome for great icons
 - [!] Dependency load CSS
 - [x] 16:9 iframe wrapper so there is no blink when the player loads
@@ -33,6 +36,7 @@ Youtube feed API and renders videos about Oculus VR using only JS, HTML & CSS.
 - [x] Added error CSS
 - [ ] Added created with easter egg playlist
 - [ ] Stringify the CSS and bring it in with JS to reduce server requests and repaint
+- [ ] Add a transparent gradient or arrow-down under the scrollable video list side bar to alert the user that there are more videos should they not scroll first
 
 ## Known issues
 - [ ] localstorage is not set to expire ... search results may change since they were last cached resulting in duplicate videos in the list
