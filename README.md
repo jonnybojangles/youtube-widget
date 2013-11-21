@@ -17,8 +17,8 @@ Youtube feed API and renders videos about Oculus VR using only JS, HTML & CSS.
 ## Like to do
 - [x] Set up karma and Jasmine confs
 - [-] unit tests
-- [ ] Grunt build server for concatenation and magnification
-- [ ] Bower for dependencies
+- [x] Grunt build server for concatenation and magnification
+- [-] dependencies, package.json
 - [ ] Use font awesome for great icons
 - [!] Dependency load CSS
 - [x] 16:9 iframe wrapper so there is no blink when the player loads
@@ -32,3 +32,4 @@ Youtube feed API and renders videos about Oculus VR using only JS, HTML & CSS.
 - [ ] Update or write own localstorage provider I would like to see expire dates built into the system (could be built into the key as wel)
 - [x] Added error CSS
 - [ ] Added created with easter egg playlist
+- [ ] Stringify the CSS and bring it in with JS to reduce server requests and repaint
