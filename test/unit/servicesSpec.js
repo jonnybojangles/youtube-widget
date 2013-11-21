@@ -11,7 +11,9 @@ describe('Service Spec', function(){
 });
 
 
-
+/*
+* POC/dev
+* */
 angular.module('widget', []).
 	provider('withPrivate', [function(){
 		var query = 'First';

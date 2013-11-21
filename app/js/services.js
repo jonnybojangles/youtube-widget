@@ -133,7 +133,10 @@ angular.module('youtubeWidget.services', ['LocalStorageModule']).
 			createPlayer: createPlayer,
 			playNewVideo: function(player, id, timeStart, suggestedQuality){
 				if (player) {
-					player.loadVideoById(id, timeStart, suggestedQuality);
+					// @todo mobile testing on cue, vs load, vs auto play
+					player.cueVideoById(id, timeStart, suggestedQuality);
+					player.playVideo();
+
 				}
 			},
 			init: function(){

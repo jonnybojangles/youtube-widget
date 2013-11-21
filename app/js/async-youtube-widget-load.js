@@ -36,7 +36,7 @@
 			// when all is done, execute bootstrap angular application
 
 			for (var index in ws) {
-				if (ws.hasOwnProperty(index)) {
+				if (Object.prototype.hasOwnProperty.call(ws, index)) {
 					angular.bootstrap(ws[index], ['youtubeWidget']);
 				}
 			}

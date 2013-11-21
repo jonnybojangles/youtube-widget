@@ -1,8 +1,26 @@
-/*
- * Temp responsive iframe
-*/
+/* beware of at import ! */
+@import url(http://fonts.googleapis.com/css?family=Roboto:400,100);
+
+.mod-youtubeWidget {
+	font-family: "Roboto", "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+	font-weight: 100;
+	font-size: 16px;
+	line-height: 1.5;
+	padding: 10px;
+}
+.mod-youtubeWidget * {
+	-moz-box-sizing:    border-box;
+	-webkit-box-sizing: border-box;
+	box-sizing:        border-box;
+}
 .mod-youtubeWidget.error {
-	display: none;
+	-webkit-animation: fadeOut 500ms normal forwards; /* Safari 4+ */
+	-moz-animation:    fadeOut 500ms normal forwards; /* Fx 5+ */
+	-o-animation:      fadeOut 500ms normal forwards; /* Opera 12+ */
+	animation:         fadeOut 500ms normal forwards; /* IE 10+ */
+}
+.mod-youtubeWidget .mainCol .content {
+	padding: 0 0;
 }
 .mod-youtubeWidget .videoPlayerWrapper {
 	height: 0;
@@ -18,37 +36,106 @@
 	top: 0; left: 0; right: 0; bottom: 0;
 	opacity: 0;
 }
-
 .mod-youtubeWidget.playerActive .videoPlayerWrapper iframe {
 	-webkit-animation: fadeIn 500ms normal forwards; /* Safari 4+ */
 	-moz-animation:    fadeIn 500ms normal forwards; /* Fx 5+ */
 	-o-animation:      fadeIn 500ms normal forwards; /* Opera 12+ */
 	animation:         fadeIn 500ms normal forwards; /* IE 10+ */
 }
-
-@-webkit-keyframes fadeIn {
-	0%   { opacity: 0; }
-	100% { opacity: 1; }
+.mod-youtubeWidget .fade {
+	opacity: 0;
 }
-@-moz-keyframes fadeIn {
-	0%   { opacity: 0; }
-	100% { opacity: 1; }
+.mod-youtubeWidget .fadeIn {
+	-webkit-animation: fadeIn 500ms normal forwards; /* Safari 4+ */
+	-moz-animation:    fadeIn 500ms normal forwards; /* Fx 5+ */
+	-o-animation:      fadeIn 500ms normal forwards; /* Opera 12+ */
+	animation:         fadeIn 500ms normal forwards; /* IE 10+ */
 }
-@-o-keyframes fadeIn {
-	0%   { opacity: 0; }
-	100% { opacity: 1; }
-}
-@keyframes fadeIn {
-	0%   { opacity: 0; }
-	100% { opacity: 1; }
+.mod-youtubeWidget.listActive .loadMore,
+.mod-youtubeWidget.listActive .appTitle,
+.mod-youtubeWidget.listActive .listWrapper {
+	opacity: 1;
 }
 
 
+.mod-youtubeWidget .appTitle,
+.mod-youtubeWidget .videoTitle {
+	font-family: 'Roboto', serif;
+	font-weight: 400;
+	font-size: 20px;
+}
+
+.mod-youtubeWidget .appTitle {
+	font-weight: 100;
+	margin: 0 0 10px;
+}
+.mod-youtubeWidget .videoDescription {
+	max-height: 3em;
+	overflow: hidden;
+	margin: 0;
+	-webkit-transition: max-height 0.3s ease-out;
+	-moz-transition: max-height 0.3s ease-out;
+	-o-transition: max-height 0.3s ease-out;
+	transition: max-height 0.3s ease-out;
+	padding: 0 10px;
+}
+.mod-youtubeWidget .videoDescription:hover {
+	max-height: 4.5em;
+}
+.mod-youtubeWidget .videoTitle {
+	padding: 0 10px;
+}
+
+.mod-youtubeWidget .listWrapper {
+	opacity: 0;
+}
+.mod-youtubeWidget.listActive .listWrapper {
+	-webkit-animation: fadeIn 500ms normal forwards; /* Safari 4+ */
+	-moz-animation:    fadeIn 500ms normal forwards; /* Fx 5+ */
+	-o-animation:      fadeIn 500ms normal forwards; /* Opera 12+ */
+	animation:         fadeIn 500ms normal forwards; /* IE 10+ */
+
+}
+.mod-youtubeWidget .items {
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+}
+.mod-youtubeWidget .item {
+	padding: 10px;
+	margin: 10px 0 0 0;
+	cursor: pointer;
+	box-shadow: 0 4px 8px -3px rgba(0, 0, 0, 0.4);
+	border-bottom: 1px solid rgba(0, 0, 0, 0);
+}
+
+
+
+.mod-youtubeWidget .item:hover {
+	border-bottom: 1px solid #B34040;
+}
+.mod-youtubeWidget .items .row {
+	display: table;
+	width: 100%;
+	text-align: left;
+}
+.mod-youtubeWidget .items .cell {
+	display: table-cell;
+	vertical-align: middle;
+	padding: 0 0 0 10px;
+	width: 100%;
+}
+.mod-youtubeWidget .items .cell:first-child {
+	padding: 0;
+	width: auto;
+}
+.mod-youtubeWidget .loadMore .cell {
+	text-align: center;
+}
 /*
  * Spinner
- * http://prefixmycss.com/
 */
-.mod-spinner {
+.mod-youtubeWidget .mod-spinner {
 	position:absolute;
 	width: 20px;
 	height: 54px;
@@ -61,7 +148,7 @@
 .mod-youtubeWidget.playerActive .mod-spinner {
 	opacity: 0;
 }
-.mod-spinner div{
+.mod-youtubeWidget .mod-spinner div{
 	width:12%;
 	height:26%;
 	background:#000;
@@ -70,11 +157,11 @@
 	top:37%;
 	opacity:0;
 	/*animation*/
-	-webkit-animation:fade 1s linear infinite;
-	-moz-animation:fade 1s linear infinite;
-	-ms-animation:fade 1s linear infinite;
-	-o-animation:fade 1s linear infinite;
-	animation:fade 1s linear infinite;
+	-webkit-animation:spinnerFade 1s linear infinite;
+	-moz-animation:spinnerFade 1s linear infinite;
+	-ms-animation:spinnerFade 1s linear infinite;
+	-o-animation:spinnerFade 1s linear infinite;
+	animation:spinnerFade 1s linear infinite;
 	/*border-radius*/
 	-webkit-border-radius:50px;
 	-moz-border-radius:50px;
@@ -84,7 +171,7 @@
 	-moz-box-shadow:0 0 3px rgba(0,0,0,0.2);
 	box-shadow:0 0 3px rgba(0,0,0,0.2);
 }
-.mod-spinner .bar1{
+.mod-youtubeWidget .mod-spinner .bar1{
 	/*transform*/
 	-webkit-transform:rotate(0deg) translate(0, -142%);
 	-moz-transform:rotate(0deg) translate(0, -142%);
@@ -98,7 +185,7 @@
 	-o-animation-delay:0s;
 	animation-delay:0s;
 }
-.mod-spinner .bar2{
+.mod-youtubeWidget .mod-spinner .bar2{
 	/*transform*/
 	-webkit-transform:rotate(30deg) translate(0, -142%);
 	-moz-transform:rotate(30deg) translate(0, -142%);
@@ -112,7 +199,7 @@
 	-o-animation-delay:-0.9167s;
 	animation-delay:-0.9167s;
 }
-.mod-spinner .bar3{
+.mod-youtubeWidget .mod-spinner .bar3{
 	/*transform*/
 	-webkit-transform:rotate(60deg) translate(0, -142%);
 	-moz-transform:rotate(60deg) translate(0, -142%);
@@ -126,7 +213,7 @@
 	-o-animation-delay:-0.833s;
 	animation-delay:-0.833s;
 }
-.mod-spinner .bar4{
+.mod-youtubeWidget .mod-spinner .bar4{
 	/*transform*/
 	-webkit-transform:rotate(90deg) translate(0, -142%);
 	-moz-transform:rotate(90deg) translate(0, -142%);
@@ -140,7 +227,7 @@
 	-o-animation-delay:-0.75s;
 	animation-delay:-0.75s;
 }
-.mod-spinner .bar5{
+.mod-youtubeWidget .mod-spinner .bar5{
 	/*transform*/
 	-webkit-transform:rotate(120deg) translate(0, -142%);
 	-moz-transform:rotate(120deg) translate(0, -142%);
@@ -154,7 +241,7 @@
 	-o-animation-delay:-0.667s;
 	animation-delay:-0.667s;
 }
-.mod-spinner .bar6{
+.mod-youtubeWidget .mod-spinner .bar6{
 	/*transform*/
 	-webkit-transform:rotate(150deg) translate(0, -142%);
 	-moz-transform:rotate(150deg) translate(0, -142%);
@@ -168,7 +255,7 @@
 	-o-animation-delay:-0.5833s;
 	animation-delay:-0.5833s;
 }
-.mod-spinner .bar7{
+.mod-youtubeWidget .mod-spinner .bar7{
 	/*transform*/
 	-webkit-transform:rotate(180deg) translate(0, -142%);
 	-moz-transform:rotate(180deg) translate(0, -142%);
@@ -182,7 +269,7 @@
 	-o-animation-delay:-0.5s;
 	animation-delay:-0.5s;
 }
-.mod-spinner .bar8{
+.mod-youtubeWidget .mod-spinner .bar8{
 	/*transform*/
 	-webkit-transform:rotate(210deg) translate(0, -142%);
 	-moz-transform:rotate(210deg) translate(0, -142%);
@@ -196,7 +283,7 @@
 	-o-animation-delay:-0.41667s;
 	animation-delay:-0.41667s;
 }
-.mod-spinner .bar9{
+.mod-youtubeWidget .mod-spinner .bar9{
 	/*transform*/
 	-webkit-transform:rotate(240deg) translate(0, -142%);
 	-moz-transform:rotate(240deg) translate(0, -142%);
@@ -210,7 +297,7 @@
 	-o-animation-delay:-0.333s;
 	animation-delay:-0.333s;
 }
-.mod-spinner .bar10{
+.mod-youtubeWidget .mod-spinner .bar10{
 	/*transform*/
 	-webkit-transform:rotate(270deg) translate(0, -142%);
 	-moz-transform:rotate(270deg) translate(0, -142%);
@@ -224,7 +311,7 @@
 	-o-animation-delay:-0.25s;
 	animation-delay:-0.25s;
 }
-.mod-spinner .bar11{
+.mod-youtubeWidget .mod-spinner .bar11{
 	/*transform*/
 	-webkit-transform:rotate(300deg) translate(0, -142%);
 	-moz-transform:rotate(300deg) translate(0, -142%);
@@ -238,7 +325,7 @@
 	-o-animation-delay:-0.1667s;
 	animation-delay:-0.1667s;
 }
-.mod-spinner .bar12{
+.mod-youtubeWidget .mod-spinner .bar12{
 	/*transform*/
 	-webkit-transform:rotate(330deg) translate(0, -142%);
 	-moz-transform:rotate(330deg) translate(0, -142%);
@@ -252,7 +339,187 @@
 	-o-animation-delay:-0.0833s;
 	animation-delay:-0.0833s;
 }
-@-webkit-keyframes fade{
-	from {opacity: 1;}
-	to {opacity: 0.25;}
+
+
+@media (min-width: 1000px) {
+	/*
+	 * Two column layout that is supported in both FF and IE 8+
+	*/
+	.mod-youtubeWidget .mod-wrapper {
+		display: table;
+		width: 100%;
+		overflow: hidden;
+	}
+	.mod-youtubeWidget .ie .mod-wrapper {
+		display: block;
+	}
+	.mod-youtubeWidget .row-wrapper {
+		display: table-row;
+		width: 100%;
+		height: 100%;
+	}
+	.mod-youtubeWidget .ie .row-wrapper {
+		display: table;
+	}
+	.mod-youtubeWidget .mainCol {
+		width: 70%;
+		display: table-cell;
+		vertical-align: top;
+		padding: 0 0 5px;
+	}
+	.mod-youtubeWidget .mainCol .content {
+		margin: 0 10px 0 0;
+		box-shadow: 0 4px 8px -3px rgba(0, 0, 0, 0.4);
+		border-bottom: 1px solid rgba(0, 0, 0, 0);
+		padding: 0 10px 10px;
+	}
+	.mod-youtubeWidget .listWrapper {
+		display: table-cell;
+		width: 30%;
+		height: 100%;
+		vertical-align: top;
+	}
+	.mod-youtubeWidget .ie .listWrapper {
+		position: relative;
+		overflow-y: scroll;
+		overflow-x: hidden;
+	}
+	.mod-youtubeWidget .sidebar {
+		overflow-y: scroll;
+		overflow-x: hidden;
+		height: 100%;
+		position: relative;
+		margin: 0 -30px 0 0;
+	}
+	.mod-youtubeWidget .ie .sidebar {
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		overflow: visible;
+	}
+	.mod-youtubeWidget .sidebar-content {
+		position: absolute;
+		top: 0;
+		left: 0;
+		bottom: 0;
+		height: 100%;
+		width: 100%;
+		padding: 0 20px 0 0;
+	}
+	.mod-youtubeWidget .ie .sidebar-content {
+		position: absolute;
+	}
+    .mod-youtubeWidget .items {
+		padding: 0 0 5px;
+    }
+	/*
+	 * END:  Two column layout that is supported in both FF and IE 8+
+	*/
+}
+/*
+ * fadeIn
+*/
+@-webkit-keyframes fadeIn {
+	0%   {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+@-moz-keyframes fadeIn {
+	0%   {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+@-o-keyframes fadeIn {
+	0%   {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+@keyframes fadeIn {
+	0%   {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+/*
+ * fadeOut
+ */
+@-webkit-keyframes fadeOut {
+	0%   {
+		opacity: 1;
+	}
+	100% {
+		opacity: 0;
+	}
+}
+@-moz-keyframes fadeOut {
+	0%   {
+		opacity: 1;
+	}
+	100% {
+		opacity: 0;
+	}
+}
+@-o-keyframes fadeOut {
+	0%   {
+		opacity: 1;
+	}
+	100% {
+		opacity: 0;
+	}
+}
+@keyframes fadeOut {
+	0%   {
+		opacity: 1;
+	}
+	100% {
+		opacity: 0;
+	}
+}
+/*
+ * spinnerFade
+*/
+@-webkit-keyframes spinnerFade{
+	from {
+		opacity: 1;
+	}
+	to {
+		opacity: 0.25;
+	}
+}
+@-moz-keyframes spinnerFade{
+	from {
+		opacity: 1;
+	}
+	to {
+		opacity: 0.25;
+	}
+}
+@-o-keyframes spinnerFade{
+	from {
+		opacity: 1;
+	}
+	to {
+		opacity: 0.25;
+	}
+}
+@-keyframes spinnerFade{
+	from {
+		opacity: 1;
+	}
+	to {
+		opacity: 0.25;
+	}
 }
