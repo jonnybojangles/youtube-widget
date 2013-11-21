@@ -13,49 +13,65 @@ angular.module('youtubeWidget.directives', []).
 			'<div class="mod-youtubeWidget" ' +
 				'data-ng-class="{playerActive: isPlayerActive, listActive: isListActive, error: isError}"' +
 			'>' +
-				'<div class="mainCol">' +
-					'<a name="videoPlayerTop"></a>' +
-					'<p ' +
-						'class="fade appTitle" ' +
-						'data-ng-class="{fadeIn: videos}"' +
-					'>' +
-						'{{query}} YouTube Videos' +
-					'</p>' +
-					'<div class="videoPlayerWrapper">' +
-						'<div class="mod-spinner">' +
-							'<div class="bar1"></div>' +
-							'<div class="bar2"></div>' +
-							'<div class="bar3"></div>' +
-							'<div class="bar4"></div>' +
-							'<div class="bar5"></div>' +
-							'<div class="bar6"></div>' +
-							'<div class="bar7"></div>' +
-							'<div class="bar8"></div>' +
-							'<div class="bar9"></div>' +
-							'<div class="bar10"></div>' +
-							'<div class="bar11"></div>' +
-							'<div class="bar12"></div>' +
+				'<!--[if IE]>' +
+				'<div class="ie">' +
+				'<![endif]-->' +
+					'<div class="mod-wrapper">' +
+						'<div class="row-wrapper">' +
+							'<div class="mainCol">' +
+								'<div class="content">' +
+									'<a name="videoPlayerTop"></a>' +
+									'<p ' +
+										'class="fade appTitle" ' +
+										'data-ng-class="{fadeIn: videos}"' +
+									'>' +
+										'{{query}} YouTube Videos' +
+									'</p>' +
+									'<div class="videoPlayerWrapper">' +
+										'<div class="mod-spinner">' +
+											'<div class="bar1"></div>' +
+											'<div class="bar2"></div>' +
+											'<div class="bar3"></div>' +
+											'<div class="bar4"></div>' +
+											'<div class="bar5"></div>' +
+											'<div class="bar6"></div>' +
+											'<div class="bar7"></div>' +
+											'<div class="bar8"></div>' +
+											'<div class="bar9"></div>' +
+											'<div class="bar10"></div>' +
+											'<div class="bar11"></div>' +
+											'<div class="bar12"></div>' +
+										'</div>' +
+										'<div data-video-player ' +
+											'data-video-meta="videoMeta"' +
+											'data-player="player"' +
+											'data-is-player-active="isPlayerActive"' +
+										'></div>' +
+									'</div>' +
+									'<h2 class="videoTitle">{{videoMeta.title}}</h2>' +
+									'<p class="videoDescription">{{videoMeta.description}}</p>' +
+								'</div>' +
+							'</div>' +
+							'<div class="listWrapper">' +
+								'<div class="sidebar">' +
+									'<div class="sidebar-content">' +
+										'<div data-video-list ' +
+										'data-videos="videos" ' +
+										'data-player="player"' +
+										'data-query="query"' +
+										'data-is-error="isError"' +
+										'data-is-list-active="isListActive"' +
+										'data-video-meta="videoMeta"' +
+										'></div>' +
+									'</div>' +
+								'</div>' +
+							'</div>' +
 						'</div>' +
-						'<div data-video-player ' +
-							'data-video-meta="videoMeta"' +
-							'data-player="player"' +
-							'data-is-player-active="isPlayerActive"' +
-						'></div>' +
 					'</div>' +
-					'<h2 class="videoTitle">{{videoMeta.title}}</h2>' +
-					'<p class="videoDescription">{{videoMeta.description}}</p>' +
-					'<div class="listWrapper">' +
-					'<div data-video-list ' +
-						'data-videos="videos" ' +
-						'data-player="player"' +
-						'data-query="query"' +
-						'data-is-error="isError"' +
-						'data-is-list-active="isListActive"' +
-						'data-video-meta="videoMeta"' +
-					'></div>' +
-					'</div>' +
+				'<!--[if IE]>' +
 				'</div>' +
-			'</div>' +
+				'<![endif]-->' +
+				'</div>' +
 			'');
 	});
 

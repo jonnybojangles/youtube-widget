@@ -9,7 +9,9 @@
 	padding: 10px;
 }
 .mod-youtubeWidget * {
-	box-sizing: border-box;
+	-moz-box-sizing:    border-box;
+	-webkit-box-sizing: border-box;
+	box-sizing:        border-box;
 }
 .mod-youtubeWidget.error {
 	-webkit-animation: fadeOut 500ms normal forwards; /* Safari 4+ */
@@ -17,10 +19,8 @@
 	-o-animation:      fadeOut 500ms normal forwards; /* Opera 12+ */
 	animation:         fadeOut 500ms normal forwards; /* IE 10+ */
 }
-.mod-youtubeWidget .mainCol {
-	box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.3);
-	border-bottom: 1px solid rgba(0, 0, 0, 0);
-	padding: 0 10px 10px;
+.mod-youtubeWidget .mainCol .content {
+	padding: 0 0;
 }
 .mod-youtubeWidget .videoPlayerWrapper {
 	height: 0;
@@ -69,7 +69,7 @@
 	font-weight: 100;
 	margin: 0 0 10px;
 }
-.mod-youtubeWidget .videoDescription{
+.mod-youtubeWidget .videoDescription {
 	max-height: 3em;
 	overflow: hidden;
 	margin: 0;
@@ -77,12 +77,14 @@
 	-moz-transition: max-height 0.3s ease-out;
 	-o-transition: max-height 0.3s ease-out;
 	transition: max-height 0.3s ease-out;
-
+	padding: 0 10px;
 }
 .mod-youtubeWidget .videoDescription:hover {
 	max-height: 4.5em;
 }
-
+.mod-youtubeWidget .videoTitle {
+	padding: 0 10px;
+}
 
 .mod-youtubeWidget .listWrapper {
 	opacity: 0;
@@ -97,12 +99,13 @@
 .mod-youtubeWidget .items {
 	list-style-type: none;
 	padding: 0;
+	margin: 0;
 }
 .mod-youtubeWidget .item {
 	padding: 10px;
 	margin: 10px 0 0 0;
 	cursor: pointer;
-	box-shadow: 0 5px 7px -3px rgba(0, 0, 0, 0.3);
+	box-shadow: 0 4px 8px -3px rgba(0, 0, 0, 0.4);
 	border-bottom: 1px solid rgba(0, 0, 0, 0);
 }
 
@@ -339,25 +342,82 @@
 
 
 @media (min-width: 1000px) {
-	.mod-youtubeWidget {
-		padding: 0;
-
+	/*
+	 * Two column layout that is supported in both FF and IE 8+
+	*/
+	.mod-youtubeWidget .mod-wrapper {
+		display: table;
 		width: 100%;
-		margin: 0 -30% 0 0;
+		overflow: hidden;
+	}
+	.mod-youtubeWidget .ie .mod-wrapper {
+		display: block;
+	}
+	.mod-youtubeWidget .row-wrapper {
+		display: table-row;
+		width: 100%;
+		height: 100%;
+	}
+	.mod-youtubeWidget .ie .row-wrapper {
+		display: table;
 	}
 	.mod-youtubeWidget .mainCol {
-		margin: 0 30% 0 0;
-
+		width: 70%;
+		display: table-cell;
+		vertical-align: top;
+		padding: 0 0 5px;
+	}
+	.mod-youtubeWidget .mainCol .content {
+		margin: 0 10px 0 0;
+		box-shadow: 0 4px 8px -3px rgba(0, 0, 0, 0.4);
+		border-bottom: 1px solid rgba(0, 0, 0, 0);
+		padding: 0 10px 10px;
 	}
 	.mod-youtubeWidget .listWrapper {
-		max-width: 30%;
-
-		float: right;
+		display: table-cell;
+		width: 30%;
+		height: 100%;
+		vertical-align: top;
 	}
+	.mod-youtubeWidget .ie .listWrapper {
+		position: relative;
+		overflow-y: scroll;
+		overflow-x: hidden;
+	}
+	.mod-youtubeWidget .sidebar {
+		overflow-y: scroll;
+		overflow-x: hidden;
+		height: 100%;
+		position: relative;
+		margin: 0 -30px 0 0;
+	}
+	.mod-youtubeWidget .ie .sidebar {
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		overflow: visible;
+	}
+	.mod-youtubeWidget .sidebar-content {
+		position: absolute;
+		top: 0;
+		left: 0;
+		bottom: 0;
+		height: 100%;
+		width: 100%;
+		padding: 0 20px 0 0;
+	}
+	.mod-youtubeWidget .ie .sidebar-content {
+		position: absolute;
+	}
+    .mod-youtubeWidget .items {
+		padding: 0 0 5px;
+    }
+	/*
+	 * END:  Two column layout that is supported in both FF and IE 8+
+	*/
 }
-
-
-
 /*
  * fadeIn
 */
