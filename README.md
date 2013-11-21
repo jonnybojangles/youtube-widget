@@ -3,6 +3,9 @@ Youtube Widget
 Implement a single page that interfaces with the Youtube API (iframe or JS) as well as the
 Youtube feed API and renders videos about Oculus VR using only JS, HTML & CSS.
 
+## Example
+<http://youtube.solidcobalt.com/> as of 20131121
+
 ## Requirements
 - [x] Only a body tag. Make use of a templating engine
 - [x] Show one video at a time
