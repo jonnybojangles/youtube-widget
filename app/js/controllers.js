@@ -7,7 +7,7 @@ angular.module('youtubeWidget.controllers', []).
 	controller('youtubeWidgetApp', ['$scope', function($scope){
 		$scope.videos = [];
 		// @todo make this a configure
-		$scope.query = 'Oculus';
+		$scope.query = 'Test';
 		$scope.player = null;
 		$scope.videoMeta = {
 			videoId: '',
@@ -27,8 +27,8 @@ angular.module('youtubeWidget.controllers', []).
 	* Controller related to the video list directive.
 	* */
 	controller('videoList',
-		['$scope', '$element', 'videoPlayer', 'videoSearch',
-		function($scope, $element, videoPlayer, videoSearch){
+		['$scope', '$element', 'videoPlayer', 'videoSearch', '$anchorScroll',
+		function($scope, $element, videoPlayer, videoSearch, $anchorScroll){
 		/*
 		* Call the videoSearch service and set up the promise success/resolve
 		* */
@@ -47,7 +47,6 @@ angular.module('youtubeWidget.controllers', []).
 		* Set list active flag for app
 		* */
 		function parseVideoList(data){
-			console.log(data);
 			/*
 			* Check if the data is in an expected format and that there are actually videos
 			* */
@@ -82,19 +81,18 @@ angular.module('youtubeWidget.controllers', []).
 		/*
 		* When a list item is clicked load the associated video.
 		* */
-		function listItemClick(event){
-			var element = angular.element(event.srcElement),
-				videoId = element.attr('data-video-id');
-			videoPlayer.playNewVideo($scope.player, videoId);
-			$scope.videoMeta.videoId = videoId;
-			$scope.videoMeta.title = element.attr('data-video-title');
-			$scope.videoMeta.description = element.attr('data-video-description');
+		function listItemClicked(video){
+			videoPlayer.playNewVideo($scope.player, video.id.videoId);
+			$scope.videoMeta.videoId = video.id.videoId;
+			$scope.videoMeta.title = video.snippet.title;
+			$scope.videoMeta.description = video.snippet.description;
+			$anchorScroll('videoPlayerTop');
 		}
 		/*
 		* expose events to the template
 		* */
 		$scope.loadMore = loadMore;
-		$scope.listItemClick = listItemClick;
+		$scope.listItemClicked = listItemClicked;
 		/*
 		 * Get our first list of videos
 		 * */
