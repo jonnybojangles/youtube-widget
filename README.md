@@ -37,6 +37,7 @@ Youtube feed API and renders videos about Oculus VR using only JS, HTML & CSS.
 - [ ] Added created with easter egg playlist
 - [ ] Stringify the CSS and bring it in with JS to reduce server requests and repaint
 - [ ] Add a transparent gradient or arrow-down under the scrollable video list side bar to alert the user that there are more videos should they not scroll first
+- [ ] Add an active state (horizontal bar with small delta) to the current video, add a scroll to active video in the video list.
 
 ## Known issues
 - [ ] localstorage is not set to expire ... search results may change since they were last cached resulting in duplicate videos in the list
